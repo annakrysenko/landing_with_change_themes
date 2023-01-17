@@ -1,0 +1,66 @@
+.theme {
+    display: flex;
+    position: relative;
+
+    // Кнопка скидання теми
+}
+.theme__reset {
+    opacity: 0;
+    visibility: hidden;
+
+    background: none;
+    border: none;
+}
+
+.theme__reset.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.theme__reset::before {
+    content: "x";
+    position: absolute;
+    top: 0;
+    right: 12px;
+    cursor: pointer;
+
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    font-size: 6px;
+    color: white;
+    background-color: black;
+    line-height: 7px;
+    text-align: center;
+}
+
+// Кнопка
+.theme__on {
+    padding: 15px 15px;
+    margin: auto;
+    border: none;
+    background: transparent;
+}
+
+// Зміни відносно налаштувань компʼютера ====
+html.dark body {
+    background-color: black;
+    color: white;
+}
+
+html.light body {
+    background-color: white;
+    color: black;
+}
+
+html.dark .theme__on {
+    background-image: url(../images/sun.svg);
+    background-size: contain;
+}
+
+html.light .theme__on {
+    background-image: url(../images/moon.svg);
+    background-size: contain;
+}
+
+// ==========================================

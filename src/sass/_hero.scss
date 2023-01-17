@@ -1,0 +1,104 @@
+.hero {
+    padding: 15px 15px;
+    min-height: 100vh;
+    display: flex;
+
+    background-image: url(../images/rose.svg);
+    background-repeat: no-repeat;
+    background-position: center 0;
+    background-size: 280px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 50px;
+    width: 800px;
+
+    margin-top: 150px;
+    position: absolute;
+    top: 10%;
+    left: 5%;
+
+    z-index: 2;
+}
+
+.title {
+    font-family: "Amita", cursive;
+    font-size: 85px;
+    line-height: 100px;
+    letter-spacing: 0.07em;
+
+    color: #000000;
+
+    margin-bottom: 30px;
+}
+
+.rose {
+    color: var(--accent-color);
+}
+
+.discription {
+    font-weight: 200;
+    font-size: 36px;
+    line-height: 42px;
+    letter-spacing: 0.06em;
+    width: 205px;
+
+    color: #271908;
+
+    margin-left: 15px;
+    margin-bottom: 70px;
+}
+
+.button-menu {
+    background-color: #271908;
+    color: white;
+    padding: 24px 40px;
+    border-radius: 40px;
+    border: none;
+}
+
+.img-container {
+    width: 50%;
+    height: 80%;
+
+    background-image: url(../images/wine.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.wheel {
+    position: absolute;
+    bottom: 100px;
+    left: -100px;
+    // transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+}
+
+.wheel__word {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.wheel__letter {
+    outline: 1px dashed transparent;
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+    width: 0;
+    transform-origin: 0 100%;
+    padding-bottom: 100px;
+    font-size: 14px;
+    font-weight: 700;
+}
