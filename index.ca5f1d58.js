@@ -1,2 +1,2 @@
 !function(r){var t=document.querySelectorAll(".wheel__word"),e=-60,l=!0,o=!1,n=void 0;try{for(var a,c=t[Symbol.iterator]();!(l=(a=c.next()).done);l=!0)a.value.style.transform="rotate(".concat(e,"deg)"),e+=r}catch(r){o=!0,n=r}finally{try{l||null==c.return||c.return()}finally{if(o)throw n}}}(15),function(r){var t=document.querySelectorAll(".wheel__letter"),e=0,l=!0,o=!1,n=void 0;try{for(var a,c=t[Symbol.iterator]();!(l=(a=c.next()).done);l=!0)a.value.style.transform="rotate(".concat(e,"deg)"),e+=r}catch(r){o=!0,n=r}finally{try{l||null==c.return||c.return()}finally{if(o)throw n}}}(10);
-//# sourceMappingURL=index.9016b7c1.js.map
+//# sourceMappingURL=index.ca5f1d58.js.map
