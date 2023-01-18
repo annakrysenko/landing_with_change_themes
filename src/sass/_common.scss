@@ -39,7 +39,13 @@ button {
   cursor: pointer;
 }
 
+html {
+  height: 100vh;
+}
+
 body {
+  height: 100%;
+
   font-family: "Raleway", sans-serif;
 
   transition: all 0.3s ease 0s;

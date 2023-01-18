@@ -1,74 +1,69 @@
-   const refs = {
-    htmlBlock : document.documentElement, // HTML root element (корневий елемент) 
-    themeButton: document.querySelector('.theme__on'), // Кнопка теми
-    resetThemeButton: document.querySelector('.theme__reset')
-}
+const themeButtonEl = document.querySelector('.theme__on'); // Кнопка теми
+const resetThemeButtonEl = document.querySelector('.theme__reset'); // Кнопка скидання налаштувань користувача
+const htmlEl = document.documentElement; // HTML root element (корневий елемент)
+const themeContainerEl = document.querySelector('.theme-container') 
 
-window.addEventListener('load', windowLoad)// Чекаємо, що вся сторінка прогрузилась  
+const inLocalStorageTheme = localStorage.getItem('user-theme'); // Отримаємо збережену тему
+
+
+window.addEventListener('load', windowLoad)// Чекаємо, що вся сторінка прогрузилась 
 
 function windowLoad() {
-
-    const inLocalStorageTheme = localStorage.getItem('user-theme'); // Отримаємо збережену тему
+    setThemeClass() // Дивиться чи є в локал стореджі брережена тема, якщо не - системна тема
     
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setOsTheme) 
 
-    // Системні налаштування
-    let userTheme;
-    if (window.matchMedia) {
-        userTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        
-    }
-
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-        let currentTheme = refs.htmlBlock.classList.contains('light') ? 'light' : 'dark'; 
-        !inLocalStorageTheme ? changeTheme() : null;
-        
-    }); 
-    
-
-    // ========== Функція додавання класу теми =======
-    function setThemeClass() {
-        if (inLocalStorageTheme) {
-            refs.htmlBlock.classList.add(inLocalStorageTheme);
-            refs.resetThemeButton.classList.add('active')
-        }
-        else {
-            refs.htmlBlock.classList.add(userTheme);
-        }
-    }
-    setThemeClass() 
-
-    // Зміна теми по кліку
-    if (refs.themeButton) {
-        refs.themeButton.addEventListener('click', () => {
-            refs.resetThemeButton.classList.add('active');
-            changeTheme(true);
-        })
-    }
-    if (refs.resetThemeButton) {
-        refs.themeButton.addEventListener('click', () => {
-            refs.resetThemeButton.classList.remove('active');
-            localStorage.setItem('user-theme', '')
-        })
-    }
-
-    //=================================================
-    function changeTheme(saveTheme = false) {
-        refs.themeButton.addEventListener('click', function () {
-            let currentTheme = refs.htmlBlock.classList.contains('light') ? 'light' : 'dark'; 
-            let newTheme;
-
-            if (currentTheme === 'light') {
-                newTheme = 'dark';
-            }
-            else if (currentTheme === 'dark') {
-                newTheme = 'light';
-            }
-
-            refs.htmlBlock.classList.remove(currentTheme);
-            refs.htmlBlock.classList.add(newTheme);  
-            !saveTheme ? localStorage.setItem('user-theme', newTheme) : null;
-        });  
-    }
-    //==================================================
-
+    themeButtonEl.addEventListener('click', changeTheme);
+    resetThemeButtonEl.addEventListener('click', setOsTheme);
+     
 }
+
+function setThemeClass() {
+    if (inLocalStorageTheme) {
+        htmlEl.classList.add(inLocalStorageTheme);
+        resetThemeButtonEl.classList.add('active')
+    }
+    else {
+       setOsTheme()
+    }
+}
+function setOsTheme() {
+    let userThemeOS = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; // Отримуємо тему операційної системи
+
+    if (htmlEl.classList.contains('light')) {
+        htmlEl.classList.toggle('light');
+    }
+    else {
+        htmlEl.classList.toggle('dark');  
+    }
+
+    htmlEl.classList.add(userThemeOS);
+    localStorage.removeItem('user-theme');
+
+    if (inLocalStorageTheme) {
+        resetThemeButtonEl.classList.remove('active');
+    }
+
+};
+
+
+
+function changeTheme() { 
+    let currentTheme = htmlEl.classList.contains('light') ? 'light' : 'dark'; 
+    let newTheme;
+
+    if (currentTheme === 'light') {
+        newTheme = 'dark';
+    }
+    else if (currentTheme === 'dark') {
+        newTheme = 'light';
+    }
+
+    htmlEl.classList.remove(currentTheme);
+    htmlEl.classList.add(newTheme);  
+
+    
+    localStorage.setItem('user-theme', newTheme)
+    
+    resetThemeButtonEl.classList.add('active');  
+};

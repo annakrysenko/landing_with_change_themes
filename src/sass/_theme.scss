@@ -1,9 +1,16 @@
+.theme-container {
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+    align-items: center;
+}
+
 .theme {
     display: flex;
     position: relative;
-
-    // Кнопка скидання теми
 }
+
+// Кнопка скидання теми
 .theme__reset {
     opacity: 0;
     visibility: hidden;
@@ -21,7 +28,7 @@
     content: "x";
     position: absolute;
     top: 0;
-    right: 12px;
+    right: 0;
     cursor: pointer;
 
     width: 8px;

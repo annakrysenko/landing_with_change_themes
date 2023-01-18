@@ -8,6 +8,7 @@ const rotateBetweenWords = (value) => {
         word.style.transform = `rotate(${ deg }deg)`
         deg += value
     }
+    
 }
 
 // Відстань між буквами
@@ -20,8 +21,9 @@ const rotateBetweenLetters = (value) => {
         letter.style.transform = `rotate(${ deg }deg)`
         deg += value
     }
-    
 }
 
-rotateBetweenWords(15)
-rotateBetweenLetters(10)
+export { rotateBetweenWords, rotateBetweenLetters };
+
+
+ 
