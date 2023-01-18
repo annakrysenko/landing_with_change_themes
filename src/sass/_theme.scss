@@ -1,3 +1,9 @@
+.arrow::after {
+    content: "\21D2";
+    margin-left: 15px;
+    color: var(--accent-color);
+}
+
 .theme-container {
     display: flex;
     flex-direction: row;
