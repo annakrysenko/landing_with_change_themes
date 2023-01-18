@@ -40,13 +40,8 @@ function setOsTheme() {
     htmlEl.classList.add(userThemeOS);
     localStorage.removeItem('user-theme');
 
-    if (inLocalStorageTheme) {
-        resetThemeButtonEl.classList.remove('active');
-    }
-
+    resetThemeButtonEl.classList.remove('active');
 };
-
-
 
 function changeTheme() { 
     let currentTheme = htmlEl.classList.contains('light') ? 'light' : 'dark'; 
