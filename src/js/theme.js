@@ -11,12 +11,47 @@ window.addEventListener('load', windowLoad)// Чекаємо, що вся сто
 function windowLoad() {
     setThemeClass() // Дивиться чи є в локал стореджі брережена тема, якщо не - системна тема
     
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setOsTheme) 
+    if (!localStorage) {
+        listenerOsThemeOn()
+    }
 
-    themeButtonEl.addEventListener('click', changeTheme);
-    resetThemeButtonEl.addEventListener('click', setOsTheme);
-     
+    themeButtonEl.addEventListener('click', () => {
+        listenerOsThemeOff()
+        changeTheme()
+    });
+    resetThemeButtonEl.addEventListener('click', () => {
+        // listenerOsThemeOn();
+        setOsTheme();
+    })
 }
+
+function listenerOsThemeOn() {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setOsTheme)
+}
+
+function listenerOsThemeOff() {
+    window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', setOsTheme)
+}
+
+function changeTheme() { 
+    let currentTheme = htmlEl.classList.contains('light') ? 'light' : 'dark'; 
+    let newTheme;
+
+    if (currentTheme === 'light') {
+        newTheme = 'dark';
+    }
+    else if (currentTheme === 'dark') {
+        newTheme = 'light';
+    }
+
+    htmlEl.classList.remove(currentTheme);
+    htmlEl.classList.add(newTheme);  
+
+    
+    localStorage.setItem('user-theme', newTheme)
+    console.log(inLocalStorageTheme)
+    resetThemeButtonEl.classList.add('active');  
+};
 
 function setThemeClass() {
     if (inLocalStorageTheme) {
@@ -43,22 +78,3 @@ function setOsTheme() {
     resetThemeButtonEl.classList.remove('active');
 };
 
-function changeTheme() { 
-    let currentTheme = htmlEl.classList.contains('light') ? 'light' : 'dark'; 
-    let newTheme;
-
-    if (currentTheme === 'light') {
-        newTheme = 'dark';
-    }
-    else if (currentTheme === 'dark') {
-        newTheme = 'light';
-    }
-
-    htmlEl.classList.remove(currentTheme);
-    htmlEl.classList.add(newTheme);  
-
-    
-    localStorage.setItem('user-theme', newTheme)
-    
-    resetThemeButtonEl.classList.add('active');  
-};
