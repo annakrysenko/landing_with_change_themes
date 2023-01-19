@@ -3,15 +3,14 @@ const resetThemeButtonEl = document.querySelector('.theme__reset'); // Кноп�
 const htmlEl = document.documentElement; // HTML root element (корневий елемент)
 const themeContainerEl = document.querySelector('.theme-container') 
 
-const inLocalStorageTheme = localStorage.getItem('user-theme'); // Отримаємо збережену тему
-
+function inLocalStorageTheme() { return localStorage.getItem('user-theme') } // Отримаємо збережену тему
 
 window.addEventListener('load', windowLoad)// Чекаємо, що вся сторінка прогрузилась 
 
 function windowLoad() {
     setThemeClass() // Дивиться чи є в локал стореджі брережена тема, якщо не - системна тема
-    
-    if (!localStorage) {
+
+    if (!inLocalStorageTheme()) { // якщо локал сторедж пустий
         listenerOsThemeOn()
     }
 
@@ -26,7 +25,11 @@ function windowLoad() {
 }
 
 function listenerOsThemeOn() {
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setOsTheme)
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        if (inLocalStorageTheme() === null) {
+        setOsTheme()
+        }
+    })    
 }
 
 function listenerOsThemeOff() {
@@ -49,31 +52,27 @@ function changeTheme() {
 
     
     localStorage.setItem('user-theme', newTheme)
-    console.log(inLocalStorageTheme)
     resetThemeButtonEl.classList.add('active');  
 };
 
 function setThemeClass() {
-    if (inLocalStorageTheme) {
-        htmlEl.classList.add(inLocalStorageTheme);
+    if (inLocalStorageTheme()) {
+        htmlEl.classList.add(inLocalStorageTheme());
         resetThemeButtonEl.classList.add('active')
     }
     else {
        setOsTheme()
     }
 }
+
 function setOsTheme() {
+    localStorage.removeItem('user-theme');
+
     let userThemeOS = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; // Отримуємо тему операційної системи
 
-    if (htmlEl.classList.contains('light')) {
-        htmlEl.classList.toggle('light');
-    }
-    else {
-        htmlEl.classList.toggle('dark');  
-    }
+    htmlEl.classList.remove('light', 'dark')
 
     htmlEl.classList.add(userThemeOS);
-    localStorage.removeItem('user-theme');
 
     resetThemeButtonEl.classList.remove('active');
 };
