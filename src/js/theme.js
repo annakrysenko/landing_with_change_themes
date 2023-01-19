@@ -20,7 +20,7 @@ function windowLoad() {
         changeTheme()
     });
     resetThemeButtonEl.addEventListener('click', () => {
-        // listenerOsThemeOn();
+        listenerOsThemeOn();
         setOsTheme();
     })
 }
